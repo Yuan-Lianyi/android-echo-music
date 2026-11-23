@@ -1,3 +1,45 @@
 <resources>
-    <string name="app_name">android-echo-music</string>
+    <string name="app_name">Echo Music</string>
+
+    <!-- 底部导航 -->
+    <string name="nav_home">首页</string>
+    <string name="nav_library">媒体库</string>
+    <string name="nav_playlist">歌单</string>
+    <string name="nav_search">搜索</string>
+    <string name="nav_settings">设置</string>
+
+    <!-- 首页 / 歌曲列表 -->
+    <string name="home_title">Echo Music</string>
+    <string name="home_song_count">%1$d 首歌曲</string>
+    <string name="empty_library">还没有本地音乐\n授权存储权限后即可扫描曲库</string>
+    <string name="song_artist_album">%1$s · %2$s</string>
+    <string name="cover_description">歌曲封面</string>
+
+    <!-- 搜索 -->
+    <string name="search_hint">搜索歌名、艺术家或专辑</string>
+    <string name="search_empty">没有找到「%1$s」</string>
+
+    <!-- 歌单占位 -->
+    <string name="playlist_empty_title">还没有歌单</string>
+    <string name="playlist_empty_subtitle">W2 支持创建歌单后，这里会显示你整理好的歌单</string>
+
+    <!-- 设置 -->
+    <string name="settings_title">设置</string>
+    <string name="settings_dark_mode">深色模式</string>
+    <string name="settings_dark_mode_value">跟随系统</string>
+    <string name="settings_about">关于 Echo Music</string>
+    <string name="settings_version">版本 %1$s</string>
+    <string name="settings_hint">主题切换、默认播放模式、扫描目录排除等设置项将在 W3 补齐。</string>
+
+    <!-- 播放页 -->
+    <string name="now_playing">正在播放</string>
+    <string name="player_no_song">未在播放</string>
+    <string name="action_play">播放</string>
+    <string name="action_pause">暂停</string>
+    <string name="action_next">下一首</string>
+    <string name="action_previous">上一首</string>
+    <string name="action_back">返回</string>
+    <string name="mode_sequential">顺序播放</string>
+    <string name="mode_repeat_one">单曲循环</string>
+    <string name="mode_shuffle">随机播放</string>
 </resources>
