@@ -24,4 +24,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "android-echo-music"
 include(":app")
-include(":app")
