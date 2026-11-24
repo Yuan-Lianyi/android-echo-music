@@ -26,7 +26,23 @@
         android:id="@+id/playlistFragment"
         android:name="com.example.android_echo_music.ui.playlist.PlaylistListFragment"
         android:label="@string/nav_playlist"
-        tools:layout="@layout/fragment_playlist" />
+        tools:layout="@layout/fragment_playlist_list">
+
+        <action
+            android:id="@+id/action_playlist_to_detail"
+            app:destination="@id/playlistDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/playlistDetailFragment"
+        android:name="com.example.android_echo_music.ui.playlist.PlaylistDetailFragment"
+        android:label="@string/nav_playlist"
+        tools:layout="@layout/fragment_playlist_detail">
+
+        <argument
+            android:name="playlistId"
+            app:argType="long" />
+    </fragment>
 
     <fragment
         android:id="@+id/searchFragment"

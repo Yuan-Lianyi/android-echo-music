@@ -20,6 +20,7 @@ import com.example.android_echo_music.data.model.Song
 import com.example.android_echo_music.databinding.FragmentSearchBinding
 import com.example.android_echo_music.ui.common.appContainer
 import com.example.android_echo_music.ui.library.SongAdapter
+import com.example.android_echo_music.ui.playlist.AddToPlaylistSheet
 import kotlinx.coroutines.launch
 
 /** 搜索页：按歌名 / 艺术家 / 专辑实时过滤。 */
@@ -46,7 +47,10 @@ class SearchFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        adapter = SongAdapter(::playSong)
+        adapter = SongAdapter(
+            onSongClick = ::playSong,
+            onSongLongClick = ::showAddToPlaylistSheet
+        )
         binding.searchResults.layoutManager = LinearLayoutManager(requireContext())
         binding.searchResults.adapter = adapter
 
@@ -73,6 +77,11 @@ class SearchFragment : Fragment() {
     private fun playSong(song: Song) {
         appContainer.playerController.play(song, viewModel.results.value)
         findNavController().navigate(R.id.action_global_player)
+    }
+
+    private fun showAddToPlaylistSheet(song: Song) {
+        AddToPlaylistSheet.newInstance(song)
+            .show(parentFragmentManager, AddToPlaylistSheet.TAG)
     }
 
     override fun onDestroyView() {

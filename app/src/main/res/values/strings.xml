@@ -19,9 +19,36 @@
     <string name="search_hint">搜索歌名、艺术家或专辑</string>
     <string name="search_empty">没有找到「%1$s」</string>
 
-    <!-- 歌单占位 -->
+    <!-- 歌单 -->
+    <string name="playlist_my">我的歌单</string>
     <string name="playlist_empty_title">还没有歌单</string>
-    <string name="playlist_empty_subtitle">W2 支持创建歌单后，这里会显示你整理好的歌单</string>
+    <string name="playlist_empty_subtitle">点击右下角按钮创建第一个歌单\n在歌曲上长按即可加入歌单</string>
+    <string name="playlist_song_count">%1$d 首歌曲</string>
+    <string name="playlist_song_count_short">%1$d 首</string>
+    <string name="playlist_create">新建歌单</string>
+    <string name="playlist_create_hint">歌单名称</string>
+    <string name="playlist_rename">重命名歌单</string>
+    <string name="playlist_rename_hint">新的歌单名称</string>
+    <string name="playlist_delete">删除歌单</string>
+    <string name="playlist_delete_message">确定删除「%1$s」？歌单内的歌曲不会被删除。</string>
+    <string name="playlist_detail_empty">这个歌单还没有歌曲\n在媒体库长按歌曲即可添加</string>
+    <string name="playlist_play_all">播放全部</string>
+    <string name="playlist_add_to">添加到歌单</string>
+    <string name="playlist_add_to_empty">还没有歌单，先新建一个吧</string>
+    <string name="playlist_added">已添加到「%1$s」</string>
+    <string name="playlist_song_remove">从歌单移除</string>
+    <string name="playlist_song_remove_message">将「%1$s」从歌单移除？</string>
+    <string name="playlist_song_removed">已从歌单移除</string>
+    <string name="playlist_deleted">歌单已删除</string>
+    <string name="playlist_options">歌单操作</string>
+
+    <!-- 通用操作 -->
+    <string name="action_confirm">确定</string>
+    <string name="action_cancel">取消</string>
+    <string name="action_rename">重命名</string>
+    <string name="action_delete">删除</string>
+    <string name="error_name_empty">名称不能为空</string>
+    <string name="error_generic">操作失败，请重试</string>
 
     <!-- 设置 -->
     <string name="settings_title">设置</string>

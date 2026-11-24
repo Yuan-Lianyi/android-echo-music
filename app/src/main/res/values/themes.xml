@@ -6,4 +6,10 @@
     </style>
 
     <style name="Theme.Androidechomusic" parent="Base.Theme.Androidechomusic" />
+
+    <!-- 圆形封面：列表缩略图与播放页唱片共用 -->
+    <style name="ShapeAppearanceOverlay.EchoMusic.Circle" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
 </resources>

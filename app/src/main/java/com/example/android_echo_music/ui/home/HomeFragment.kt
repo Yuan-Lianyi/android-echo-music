@@ -20,6 +20,7 @@ import com.example.android_echo_music.databinding.FragmentHomeBinding
 import com.example.android_echo_music.ui.common.appContainer
 import com.example.android_echo_music.ui.library.SongAdapter
 import com.example.android_echo_music.ui.library.SongListViewModel
+import com.example.android_echo_music.ui.playlist.AddToPlaylistSheet
 import kotlinx.coroutines.launch
 
 /** 首页：欢迎语 + 最近歌曲入口（W2 换成「最近播放 / 最近添加」）。 */
@@ -46,7 +47,10 @@ class HomeFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        adapter = SongAdapter(::playSong)
+        adapter = SongAdapter(
+            onSongClick = ::playSong,
+            onSongLongClick = ::showAddToPlaylistSheet
+        )
         binding.homeSongList.layoutManager = LinearLayoutManager(requireContext())
         binding.homeSongList.adapter = adapter
 
@@ -64,6 +68,11 @@ class HomeFragment : Fragment() {
     private fun playSong(song: Song) {
         appContainer.playerController.play(song, viewModel.songs.value)
         findNavController().navigate(R.id.action_global_player)
+    }
+
+    private fun showAddToPlaylistSheet(song: Song) {
+        AddToPlaylistSheet.newInstance(song)
+            .show(parentFragmentManager, AddToPlaylistSheet.TAG)
     }
 
     override fun onDestroyView() {
