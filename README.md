@@ -2,7 +2,17 @@
 
 离线优先的 Android 本地音乐播放器（课程项目）。需求、分工与里程碑见 [`docs/DEVELOPMENT.md`](docs/DEVELOPMENT.md)，目标架构与文件落位见 [`docs/PROJECT_STRUCTURE.md`](docs/PROJECT_STRUCTURE.md)。
 
-## 当前进度（W1 · 工程与界面骨架）
+## 当前进度
+
+### `chore/w2-data-foundation`：W2 数据层地基（本分支）
+
+- **Room 地基**：接入 Room 2.8.5 + KSP，导出数据库 schema v1。
+- **持久化表**：`playlist`、`playlist_song`、`favorite`、`play_history`。
+- **Repository**：`PlaylistRepositoryImpl` 已在 `AppContainer.playlistRepository` 注入，支持歌单 CRUD、收藏和播放历史数据流。
+- **仍待替换**：`MusicRepository` 仍是 `FakeMusicRepository`，下一步接 MediaStore 扫描与运行时音频权限。
+- 数据层边界、表结构和接线方式见 [`docs/DATA_LAYER.md`](docs/DATA_LAYER.md)。
+
+### `main`：W1 工程与界面骨架
 
 已完成：
 
@@ -19,9 +29,9 @@
 | 模块 | 现状 | 下一步 |
 |---|---|---|
 | `data/repository/FakeMusicRepository` | 8 首假数据，都指向 `res/raw/demo_tone.wav` | B：换成 MediaStore 扫描 + 权限封装 |
-| 歌单页 / 设置页 | 静态占位文案 | B 提供 Room 歌单；C 补歌单列表、详情与设置项 |
+| 歌单页 / 设置页 | 歌单页仍是静态占位；Room 歌单数据层已在 `chore/w2-data-foundation` 提供 | C 补歌单列表、详情与设置项，ViewModel 接 `PlaylistRepository` |
 | 播放队列 / 歌词 / 深色模式切换 | 未实现 | A 补队列；C 补歌词解析与主题 |
-| 收藏 / 最近播放 | 未实现 | B 建表，C 接 UI |
+| 收藏 / 最近播放 | Room 表与 Repository 已在数据层分支提供，UI 未接 | C 接收藏列表与最近播放页；播放状态变化由 UI/协调层记录历史 |
 
 ## 运行
 
@@ -44,8 +54,9 @@ app/src/main/java/com/example/android_echo_music/
 ├── AppContainer.kt           手写依赖容器（替换点集中在这里）
 ├── MainActivity.kt           单 Activity + NavHost
 ├── data/
-│   ├── model/Song.kt         共享数据契约
-│   └── repository/           MusicRepository + W1 假实现
+│   ├── model/                Song / Playlist / PlayHistory 共享契约
+│   ├── db/                   Room Entity / DAO / Database
+│   └── repository/           MusicRepository 假实现 + PlaylistRepository Room 实现
 ├── playback/
 │   ├── PlaybackService.kt    MediaSessionService（后台播放 / 通知栏）
 │   ├── PlayerController.kt   对外唯一控制接口
@@ -60,6 +71,14 @@ app/src/main/java/com/example/android_echo_music/
 依赖方向固定为 `ui → PlayerController / MusicRepository 接口 → data/model`，UI 层不出现 Media3、Room、MediaStore 类型。
 
 ## 验证记录
+
+### `chore/w2-data-foundation`
+
+- `./gradlew :app:assembleDebug :app:testDebugUnitTest`：通过
+- `./gradlew :app:lintDebug :app:assembleDebugAndroidTest`：通过
+- `./gradlew :app:assembleDebugAndroidTest`：通过；当前无连接设备，`connectedDebugAndroidTest` 待真机/模拟器执行
+
+### `main`（W1）
 
 - `./gradlew :app:assembleDebug`：通过
 - `./gradlew :app:lintDebug`：通过（剩余为 Overdraw 等提示级警告）
