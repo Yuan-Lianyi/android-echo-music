@@ -29,9 +29,16 @@
 | 模块 | 现状 | 下一步 |
 |---|---|---|
 | `data/repository/FakeMusicRepository` | 8 首假数据，都指向 `res/raw/demo_tone.wav` | B：换成 MediaStore 扫描 + 权限封装 |
-| 歌单页 / 设置页 | 歌单页仍是静态占位；Room 歌单数据层已在 `chore/w2-data-foundation` 提供 | C 补歌单列表、详情与设置项，ViewModel 接 `PlaylistRepository` |
+| 设置页 | 仅显示版本号 | C 补主题、默认播放模式、扫描目录排除等设置项（W3） |
 | 播放队列 / 歌词 / 深色模式切换 | 未实现 | A 补队列；C 补歌词解析与主题 |
 | 收藏 / 最近播放 | Room 表与 Repository 已在数据层分支提供，UI 未接 | C 接收藏列表与最近播放页；播放状态变化由 UI/协调层记录历史 |
+
+### W2 界面层（C）
+
+- **播放页**：圆形大封面 + Coil 加载专辑封面；唱片按播放状态匀速旋转、暂停停住、切歌归零；进度拖动、上下首、模式切换沿用 W1。
+- **歌单**：列表页（新建、长按重命名 / 删除）与详情页（播放全部、点按播放、长按移出歌曲、改名 / 删除歌单）均接入 `PlaylistRepository`；Room 只返回有序 `songId`，由详情页与 `MusicRepository.observeSongs()` 合并后渲染，本地文件已删除的歌曲自动过滤。
+- **添加到歌单**：媒体库 / 首页 / 搜索结果长按歌曲弹出底部弹层，可加入已有歌单，或新建歌单并直接加入。
+- **封面**：列表与播放页统一走 `ui/common/ViewExt.kt`，没有 `albumArtUri` 时显示音符占位。
 
 ## 运行
 
@@ -71,6 +78,11 @@ app/src/main/java/com/example/android_echo_music/
 依赖方向固定为 `ui → PlayerController / MusicRepository 接口 → data/model`，UI 层不出现 Media3、Room、MediaStore 类型。
 
 ## 验证记录
+
+### W2 界面层（C）
+
+- `./gradlew :app:assembleDebug :app:lintDebug :app:testDebugUnitTest`：通过（lint 仅剩 2 条 Overdraw 提示级警告）
+- 当前无连接设备，未做装机冒烟：歌单增删改、长按加入歌单、唱片旋转需真机/模拟器再验一遍
 
 ### `chore/w2-data-foundation`
 

@@ -15,15 +15,28 @@
     android:paddingEnd="@dimen/spacing_medium"
     android:paddingBottom="@dimen/spacing_small">
 
-    <ImageView
-        android:id="@+id/coverImage"
+    <FrameLayout
         android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:background="@drawable/bg_cover_placeholder"
-        android:contentDescription="@string/cover_description"
-        android:padding="12dp"
-        android:src="@drawable/ic_music_note"
-        app:tint="?attr/colorPrimary" />
+        android:layout_height="48dp">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/coverArt"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_cover_placeholder"
+            android:contentDescription="@string/cover_description"
+            android:scaleType="centerCrop"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.EchoMusic.Circle" />
+
+        <ImageView
+            android:id="@+id/coverNote"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/cover_description"
+            android:src="@drawable/ic_music_note"
+            app:tint="?attr/colorPrimary" />
+    </FrameLayout>
 
     <LinearLayout
         android:layout_width="0dp"

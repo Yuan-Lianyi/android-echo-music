@@ -18,6 +18,7 @@ import com.example.android_echo_music.R
 import com.example.android_echo_music.data.model.Song
 import com.example.android_echo_music.databinding.FragmentSongListBinding
 import com.example.android_echo_music.ui.common.appContainer
+import com.example.android_echo_music.ui.playlist.AddToPlaylistSheet
 import kotlinx.coroutines.launch
 
 /** 媒体库：全部本地歌曲（W1 用假数据，W2 接 MediaStore）。 */
@@ -44,7 +45,10 @@ class SongListFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        adapter = SongAdapter(::playSong)
+        adapter = SongAdapter(
+            onSongClick = ::playSong,
+            onSongLongClick = ::showAddToPlaylistSheet
+        )
         binding.songList.layoutManager = LinearLayoutManager(requireContext())
         binding.songList.adapter = adapter
 
@@ -61,6 +65,11 @@ class SongListFragment : Fragment() {
     private fun playSong(song: Song) {
         appContainer.playerController.play(song, viewModel.songs.value)
         findNavController().navigate(R.id.action_global_player)
+    }
+
+    private fun showAddToPlaylistSheet(song: Song) {
+        AddToPlaylistSheet.newInstance(song)
+            .show(parentFragmentManager, AddToPlaylistSheet.TAG)
     }
 
     override fun onDestroyView() {

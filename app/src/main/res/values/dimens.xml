@@ -3,4 +3,9 @@
     <dimen name="spacing_small">8dp</dimen>
     <dimen name="spacing_medium">16dp</dimen>
     <dimen name="spacing_large">24dp</dimen>
+
+    <!-- 封面缩略图内的音符图标留白 -->
+    <dimen name="cover_note_padding">12dp</dimen>
+    <!-- 播放页唱片直径 -->
+    <dimen name="player_cover_size">240dp</dimen>
 </resources>
